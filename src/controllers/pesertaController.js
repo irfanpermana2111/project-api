@@ -24,14 +24,14 @@ const getPesertaById = async (req, res) => {
 
 const createPeserta = async (req, res) => {
   try {
-    const { nama, tempatlahir, tanggallahir, agama, alamat, telepon, jk, hobi, foto, idkabko } = req.body;
+    const { nama, tempatlahir, tanggallahir, agama, alamat, telepon, jk, hobi, foto, kabko_id } = req.body;
     
-    if (!nama || !idkabko) {
+    if (!nama || !kabko_id) {
       return res.status(400).json({ status: 'error', message: 'Nama dan ID Kabko wajib diisi' });
     }
 
     const data = await pesertaModel.createPeserta({
-      nama, tempatlahir, tanggallahir, agama, alamat, telepon, jk, hobi, foto, idkabko
+      nama, tempatlahir, tanggallahir, agama, alamat, telepon, jk, hobi, foto, kabko_id
     });
     res.status(201).json({ status: 'success', message: 'Peserta berhasil ditambahkan', data });
   } catch (err) {
@@ -42,7 +42,7 @@ const createPeserta = async (req, res) => {
 const updatePeserta = async (req, res) => {
   try {
     const { id } = req.params;
-    const { nama, tempatlahir, tanggallahir, agama, alamat, telepon, jk, hobi, foto, idkabko } = req.body;
+    const { nama, tempatlahir, tanggallahir, agama, alamat, telepon, jk, hobi, foto, kabko_id } = req.body;
     
     const existingData = await pesertaModel.getPesertaById(id);
     if (!existingData) {
@@ -50,7 +50,7 @@ const updatePeserta = async (req, res) => {
     }
 
     const data = await pesertaModel.updatePeserta(id, {
-      nama, tempatlahir, tanggallahir, agama, alamat, telepon, jk, hobi, foto, idkabko
+      nama, tempatlahir, tanggallahir, agama, alamat, telepon, jk, hobi, foto, kabko_id
     });
     res.status(200).json({ status: 'success', message: 'Peserta berhasil diperbarui', data });
   } catch (err) {

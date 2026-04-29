@@ -2,16 +2,14 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { LayoutDashboard, Users, MapPin, Building2 } from "lucide-react";
+import { LayoutDashboard, Database } from "lucide-react";
 
 export default function Sidebar() {
   const pathname = usePathname();
 
   const navItems = [
     { path: "/", label: "Dashboard", icon: LayoutDashboard },
-    { path: "/provinsi", label: "Data Provinsi", icon: MapPin },
-    { path: "/kabkota", label: "Data Kab/Kota", icon: Building2 },
-    { path: "/peserta", label: "Data Peserta", icon: Users },
+    { path: "/data", label: "Data Master", icon: Database },
   ];
 
   return (
@@ -25,9 +23,8 @@ export default function Sidebar() {
 
       <nav className="flex flex-col gap-2">
         {navItems.map((item) => {
-          const isActive = pathname === item.path;
+          const isActive = pathname === item.path || (item.path === "/data" && pathname.startsWith("/data"));
           const Icon = item.icon;
-
           return (
             <Link
               key={item.path}
@@ -38,10 +35,7 @@ export default function Sidebar() {
                   : "border-transparent text-slate-400 hover:bg-white/5 hover:text-slate-200"
               }`}
             >
-              <Icon
-                size={20}
-                className={isActive ? "text-indigo-500" : "text-slate-400"}
-              />
+              <Icon size={20} className={isActive ? "text-indigo-500" : "text-slate-400"} />
               {item.label}
             </Link>
           );

@@ -183,7 +183,7 @@ export default function DashboardPage() {
                 <p className="text-slate-500 text-xs mt-1 italic">Menampilkan 5 data peserta terakhir.</p>
               </div>
               <Link
-                href="/peserta"
+                href="/data"
                 className="group flex items-center gap-2 text-sm text-indigo-400 hover:text-indigo-300 font-bold transition-all px-3 py-1.5 rounded-lg hover:bg-indigo-400/10"
               >
                 Lihat Detail <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />

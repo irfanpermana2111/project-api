@@ -2,7 +2,8 @@ const kabkoModel = require('../models/kabkoModel');
 
 const getAllKabko = async (req, res) => {
   try {
-    const data = await kabkoModel.getAllKabko();
+    const { provinsi_id } = req.query;
+    const data = await kabkoModel.getAllKabko(provinsi_id);
     res.status(200).json({ status: 'success', data });
   } catch (err) {
     res.status(500).json({ status: 'error', message: err.message });

@@ -1,12 +1,21 @@
 const pool = require('../config/db');
 
-const getAllKabko = async () => {
-  const result = await pool.query(`
+const getAllKabko = async (provinsi_id = null) => {
+  let query = `
     SELECT kabko.*, provinsi.nama as nama_provinsi 
     FROM kabko 
     JOIN provinsi ON kabko.provinsi_id = provinsi.id 
-    ORDER BY kabko.id ASC
-  `);
+  `;
+  const params = [];
+
+  if (provinsi_id) {
+    query += ' WHERE kabko.provinsi_id = $1';
+    params.push(provinsi_id);
+  }
+
+  query += ' ORDER BY kabko.id ASC';
+  
+  const result = await pool.query(query, params);
   return result.rows;
 };
 
